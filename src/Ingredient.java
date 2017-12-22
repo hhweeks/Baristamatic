@@ -1,18 +1,68 @@
+import java.util.Comparator;
 
 public enum Ingredient {
-	coffee(.75),
-	decafCoffee(.75),
-	sugar(.25),
-	cream(.25),
-	steamedMilk(.35),
-	foamedMilk(.35),
-	espresso(1.10),
-	cocoa(.9),
-	whippedCream(1.00)
+	coffee(75){
+		@Override
+		public String toString() {
+			return "Coffee";
+		}
+	},
+	decafCoffee(75) {
+		@Override
+		public String toString() {
+			return "Decaf Coffee";
+		}
+	},
+	sugar(25) {
+		@Override
+		public String toString() {
+			return "Sugar";
+		}
+	},
+	cream(25) {
+		@Override
+		public String toString() {
+			return "Cream";
+		}
+	},
+	steamedMilk(35) {
+		@Override
+		public String toString() {
+			return "Steamed Milk";
+		}
+	},
+	foamedMilk(35) {
+		@Override
+		public String toString() {
+			return "Foamed Milk";
+		}
+	},
+	espresso(110) {
+		@Override
+		public String toString() {
+			return "Espresso";
+		}
+	},
+	cocoa(90) {
+		@Override
+		public String toString() {
+			return "Cocoa";
+		}
+	},
+	whippedCream(100) {
+		@Override
+		public String toString() {
+			return "Whipped Cream";
+		}
+	}
 	;
-	final double PRICE;
 	
-	Ingredient(double p){
+	final int PRICE;
+	
+	Ingredient(int p){
 		PRICE=p;
 	}
+	
+	@Override
+	public abstract String toString();
 }
