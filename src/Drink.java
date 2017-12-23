@@ -2,10 +2,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class Drink{
+public class Drink {
 	private final HashMap<Ingredient, Integer> ingredientMap = new HashMap<>();
 	public final DrinkType TYPE;
-	public final double CENT_PRICE;
+	private final double CENT_PRICE;
 
 	public Drink(DrinkType type, LinkedList<Pair> plist) {
 		TYPE = type;

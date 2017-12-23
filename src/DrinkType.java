@@ -111,7 +111,7 @@ public enum DrinkType {
 	};
 
 	public abstract Drink getDrink();
-	
+
 	@Override
 	public abstract String toString();
 }

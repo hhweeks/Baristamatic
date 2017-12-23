@@ -1,5 +1,8 @@
 import java.util.Comparator;
 
+/**
+ * sort Ingredient enum alpha instead of order defined
+ */
 public class IngredientComparator implements Comparator<Ingredient> {
 
 	@Override

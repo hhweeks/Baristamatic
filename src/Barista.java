@@ -31,9 +31,10 @@ public class Barista {
 
 	private void printMenu() {
 		System.out.println("Menu:");
-		for(Drink drink : drinkList){
-			DrinkType drinkType= drink.TYPE;
-			System.out.println(getIndexOfDrink(drink) + "," + drinkType + "," + drink.getDollarPriceString() + "," + (inStock(drink)));
+		for (Drink drink : drinkList) {
+			DrinkType drinkType = drink.TYPE;
+			System.out.println(getIndexOfDrink(drink) + "," + drinkType + "," + drink.getDollarPriceString() + ","
+					+ (inStock(drink)));
 		}
 	}
 
@@ -53,13 +54,12 @@ public class Barista {
 			inventory.put(ingredient, MAX_STOCK);
 		}
 	}
-	
-	private void decrementStock(Drink drink) throws Exception{
+
+	private void decrementStock(Drink drink) {
 		for (Ingredient ingredient : Ingredient.values()) {
 			int qneeded = drink.quantityRequired(ingredient);
 			int qsupply = inventory.get(ingredient);
-			assert (qsupply-qneeded>0);
-			inventory.put(ingredient, (qsupply-qneeded));
+			inventory.put(ingredient, (qsupply - qneeded));
 		}
 	}
 
@@ -70,37 +70,32 @@ public class Barista {
 
 		Collections.sort(drinkList, new DrinkComparator());
 	}
-	
-	public void displayInventoryMenu(){
+
+	public void displayInventoryMenu() {
 		printInventory();
 		printMenu();
 	}
-	
+
 	/**
-	 *return index as 1 to N (not 0 to N-1) 
+	 * return index as 1 to N (not 0 to N-1)
 	 */
-	public int getIndexOfDrink(Drink drink){
-		return drinkList.indexOf(drink)+1;
+	public int getIndexOfDrink(Drink drink) {
+		return drinkList.indexOf(drink) + 1;
 	}
-	
+
 	/**
-	 *return drink indexed 1 to N (not 0 to N-1)
+	 * return drink indexed 1 to N (not 0 to N-1)
 	 */
-	public Drink getDrinkAtIndex(int i){
-		return drinkList.get(i-1);
+	public Drink getDrinkAtIndex(int i) {
+		return drinkList.get(i - 1);
 	}
-	
-	public void dispenseDrink(Drink drink){
-		if(inStock(drink)){
-			try {
-				decrementStock(drink);
-				System.out.println("Dispensing: "+drink.TYPE.toString());
-			} catch (Exception e) {
-				//no action
-			}
-		}
-		else{
-			System.out.println("Out of stock: "+drink.TYPE.toString());
+
+	public void dispenseDrink(Drink drink) {
+		if (inStock(drink)) {
+			decrementStock(drink);
+			System.out.println("Dispensing: " + drink.TYPE.toString());
+		} else {
+			System.out.println("Out of stock: " + drink.TYPE.toString());
 		}
 	}
 }

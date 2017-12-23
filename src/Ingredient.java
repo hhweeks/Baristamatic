@@ -1,7 +1,6 @@
-import java.util.Comparator;
 
 public enum Ingredient {
-	coffee(75){
+	coffee(75) {
 		@Override
 		public String toString() {
 			return "Coffee";
@@ -54,15 +53,14 @@ public enum Ingredient {
 		public String toString() {
 			return "Whipped Cream";
 		}
-	}
-	;
-	
+	};
+
 	final int PRICE;
-	
-	Ingredient(int p){
-		PRICE=p;
+
+	Ingredient(int p) {
+		PRICE = p;
 	}
-	
+
 	@Override
 	public abstract String toString();
 }
