@@ -29,14 +29,11 @@ public class Barista {
 		}
 	}
 
-	// TODO fix index off by 1 (1-6, not 0-5)
 	private void printMenu() {
 		System.out.println("Menu:");
-		for (int i = 0; i < drinkList.size(); i++) {
-			Drink drink = drinkList.get(i);
-			DrinkType drinkType = drink.TYPE;
-
-			System.out.println(i + "," + drinkType + "," + drink.getDollarPriceString() + "," + (inStock(drink)));
+		for(Drink drink : drinkList){
+			DrinkType drinkType= drink.TYPE;
+			System.out.println(getIndexOfDrink(drink) + "," + drinkType + "," + drink.getDollarPriceString() + "," + (inStock(drink)));
 		}
 	}
 
@@ -51,9 +48,18 @@ public class Barista {
 		return true;
 	}
 
-	private void restock() {
+	public void restock() {
 		for (Ingredient ingredient : Ingredient.values()) {
 			inventory.put(ingredient, MAX_STOCK);
+		}
+	}
+	
+	private void decrementStock(Drink drink) throws Exception{
+		for (Ingredient ingredient : Ingredient.values()) {
+			int qneeded = drink.quantityRequired(ingredient);
+			int qsupply = inventory.get(ingredient);
+			assert (qsupply-qneeded>0);
+			inventory.put(ingredient, (qsupply-qneeded));
 		}
 	}
 
@@ -64,10 +70,37 @@ public class Barista {
 
 		Collections.sort(drinkList, new DrinkComparator());
 	}
-
-	public static void main(String[] args) {
-		Barista bar = new Barista();
-		bar.printInventory();
-		bar.printMenu();
+	
+	public void displayInventoryMenu(){
+		printInventory();
+		printMenu();
+	}
+	
+	/**
+	 *return index as 1 to N (not 0 to N-1) 
+	 */
+	public int getIndexOfDrink(Drink drink){
+		return drinkList.indexOf(drink)+1;
+	}
+	
+	/**
+	 *return drink indexed 1 to N (not 0 to N-1)
+	 */
+	public Drink getDrinkAtIndex(int i){
+		return drinkList.get(i-1);
+	}
+	
+	public void dispenseDrink(Drink drink){
+		if(inStock(drink)){
+			try {
+				decrementStock(drink);
+				System.out.println("Dispensing: "+drink.TYPE.toString());
+			} catch (Exception e) {
+				//no action
+			}
+		}
+		else{
+			System.out.println("Out of stock: "+drink.TYPE.toString());
+		}
 	}
 }

@@ -48,7 +48,6 @@ public class Drink{
 		return formattedDollarPrice;
 	}
 
-	//TODO add input stream
 	public void printMap() {
 		for (Map.Entry<Ingredient, Integer> entry : ingredientMap.entrySet()) {
 			Ingredient key = entry.getKey();
