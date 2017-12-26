@@ -20,7 +20,6 @@ public class Barista {
 
 		ArrayList<Ingredient> ingredientList = new ArrayList<>(Arrays.asList(Ingredient.values()));
 		Collections.sort(ingredientList, new IngredientComparator());
-		IngredientComparator ic = new IngredientComparator();
 
 		for (Ingredient ingredient : ingredientList) {
 			int quantity = inventory.get(ingredient);
